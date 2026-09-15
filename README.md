@@ -14,7 +14,7 @@
 <img width="1864" height="1402" alt="image" src="https://github.com/user-attachments/assets/e8639d4e-0fd6-428b-ac60-5742fabf3c76" />
 
 ### Konfigurasi Router
-'''bash
+```
 auto eth0
 iface eth0 inet dhcp
        up sysctl -w net.ipv4.ip_forward=1
@@ -33,7 +33,7 @@ auto eth3
 iface eth3 inet static
     address 10.74.3.1
     netmask 255.255.255.0
-'''
+```
 ### Konfigurasi Client Alice
 ```bash
 auto eth0
