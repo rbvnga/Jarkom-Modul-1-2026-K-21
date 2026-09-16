@@ -93,6 +93,16 @@ iface eth0 inet static
     netmask 255.255.255.0
     gateway 10.74.3.1
 ```
+**Pemetaan IP per client** 
+| Client | IP Address | Gateway | Segmen (Terhubung ke) | 
+|----------|----------|----------|----------|
+| Alice  | 10.74.1.2  | 10.74.1.1 | Switch 1 (eth1 Router) |
+| Mika  | 10.74.1.3  | 10.74.1.1 | Switch 1 (eth1 Router) | 
+| Chisa  | 10.74.2.2  | 10.74.2.1 | Switch 2 (eth2 Router) | 
+| knights  | 10.74.3.2  | 10.74.3.1 | Switch 3 (eth3 Router) | 
+| Eiri  | 10.74.3.3  | 10.74.3.1 | Switch 3 (eth3 Router) | 
+
+
 # 3
 **Memastikan selukurh entitas (client) di bawah Switch 1, Switch 2, Switch 3 dapat saling terhubung dan berkomunikasi satu sama lain**
 
