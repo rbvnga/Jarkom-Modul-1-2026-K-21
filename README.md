@@ -122,4 +122,20 @@ iface eth0 inet static
 
 
 # 4 
-**** 
+**Mengkonfigurasikan firewall/ipables (NAT Masquerade) dan DNS Resolver agar setiap client dapat terhubung secara mendiri** 
+# 5 
+**Memastikan seluruh kondigurasi jaringan, dengan membuat script verivikasi**
+# 6 
+**Menyaring paket yang berprotokol DNS atau ICMP melalui Wireshark pada interface node Mika**
+# 7 
+**Chisa mendirikan FTP Server dengan shared folder /var/wired/data
+dan menerapkan beberapa kebijakan akses tertentu pada user Alice, Mika, Eiri**
+# 8
+**Menganalisis sesi Wireshark ketika Knights mengupload file ke FTP server Chisa**
+# 9
+****
+# 10
+**Mencatat nilai ICMP Type dan Code untuk Echo Request vs Echo Reply, serta analisis packet loss dan RTT (min/avg/max) ketika Knights mengirimkan ping ke node Chisa**
+# 11
+**Membuktikan kelemahan protokol telnet dengan membuat akun baru pada layanan telnetd di node Chisa, lalu menunjukkan kredensial plain text**
+- Membuat akun Phantom_user dan men-setting password nya wired_ghost
