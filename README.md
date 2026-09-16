@@ -39,17 +39,17 @@ iface eth3 inet static
     address 10.74.3.1
     netmask 255.255.255.0
 ```
+Node Router, yang mengatur 4 interface jaringan sekaligus: 1 interface ke arah internet (dengan NAT), dan 3 interface sebagai gateway ke masing-masing segmen/switch.
 - `auto eth0` → interface eth0 otomatis diaktifkan saat sistem boot/network service jalan.
 - `iface eth0 inet dhcp` → interface ini pakai DHCP (dapat IP otomatis dari luar).
-- iface eth1 inet static → interface ini pakai IP statis (ditentukan manual, bukan DHCP).
-address 10.10.1.1 → IP address untuk interface ini.
-netmask 255.255.255.0 → subnet mask-nya (sama dengan /24).
-Ini biasanya dipakai untuk interface router yang jadi gateway ke satu segmen/switch tertentu.
-Sama seperti eth1, tapi untuk segmen/switch yang berbeda (10.10.2.0/24).
-Kesimpulannya:
-
-Router di contoh ini punya:
-
+- `netmask 255.255.255.0` → subnet mask-nya (sama dengan /24).
+- `up sysctl -w net.ipv4.ip_forward=1`
+Perintah `up` berarti dijalankan setelah interface ini aktif. `sysctl -w net.ipv4.ip_forward=1` mengaktifkan IP forwarding di kernel Linux. Hal ini membuat Router bisa meneruskan paket dari satu interface ke interface lain (tanpa ini, Linux akan berperilaku seperti host biasa yang cuma menerima/mengirim paket untuk dirinya sendiri, bukan meneruskan punya orang lain)
+- `up iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE` 
+Menambahkan (`-A`) rule ke tabel NAT, bagian `POSTROUTING` (diterapkan pada paket yang keluar), untuk interface eth0 (`-o eth0`), dengan aksi `MASQUERADE` yang berarti semua paket yang keluar lewat eth0 akan "disamarkan" memakai IP publik eth0, supaya client-client di segmen internal bisa mengakses internet meskipun IP mereka privat
+- `iface eth1 inet static` → interface ini pakai IP statis (ditentukan manual, bukan DHCP).
+- `address 10.74.x.x` -> Menunjukkan IP router pada segmen tersebut sekaligus berfungsi sebagai gateway bagi semua client yang ada di switch yang terhubung. <br>
+Garis Besar:
 eth0 → ke arah internet/NAT (dinamis, DHCP)
 eth1 → gateway segmen 1 (statis, 10.10.1.1)
 eth2 → gateway segmen 2 (statis, 10.10.2.1)
