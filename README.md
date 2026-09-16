@@ -182,11 +182,15 @@ LAIN ADMIN
 <img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
 LAIN ADMIN-HTTPSTREAM
 <img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
-Hal-Hal yang ditemukan
-| Nama | NRP | 
+Hal-Hal yang ditemukan: 
+| Keterangan | Isi | 
 |----------|----------|
-| Penyerang  | 172.26.7.50  | 
-| Server  |  172.26.7.100 | 
+| IP Penyerang  | 172.26.7.50  | 
+| IP Target  |  172.26.7.100 |
+| Password `lain_admin`  |  wired_pr0tocol_7 | 
+| Software & versi web server  |  Apache 2.6.62 + PHP/8.3.14 | 
+
+
 Cek Validasi di console Client (Alice)
 ```
 nc 10.4.89.246 3401
@@ -194,7 +198,7 @@ nc 10.4.89.246 3401
 <img width="1626" height="864" alt="image" src="https://github.com/user-attachments/assets/bb33e32d-95dc-4a86-ab0c-dc39d3e75e51" />
 Dari hasil analisis dan validasi ini di peroleh flag : ```KOMJAR26{W1r3d_Brut3_H0yZsExJta1BCs3ArnWVuPx21}``` 
 # 15
-****
+**Eiri telah memasang perangkat berbahaya pad anode Alice. Identifikasi Vendor ID dan Product ID perangkat USB, alamat nomor device USB, Serta pesan rahasia dari keystroke yang didapatkan**
 ### 15.1 Menggunakan filter `usb.idVendor and usb.idProduct` pada wireShark <br>
 Filter ini menemukan satu paket dengan info **"GET DESCRIPTOR Response DEVICE"** (Frame 2). Paket ini dikirim oleh device (`1794.0.0`) ke host sebagai respons atas permintaan deskriptor USB saat proses enumerasi.
 <img width="1510" height="1534" alt="Screenshot 2026-09-17 001130" src="https://github.com/user-attachments/assets/9954b390-f0f7-434d-a14f-90089d55c7a6" /> <br>
@@ -366,6 +370,10 @@ Hasil decoding baris per baris (frame 26–85):
 nc 10.4.89.246 3402
 ```
 <img width="1688" height="866" alt="Screenshot 2026-09-17 003945" src="https://github.com/user-attachments/assets/6acecd8a-72bd-4d88-9840-57dcde51a845" />
+
+# 16
+**Eiri telah memasang malware di server. Analisis lalu lintas FTP untuk mengidentifikasi alamat IP server FTP penyerang, banner software FTP, kredensial login penyerang, serta ukuran (bytes) dari file malware knights_payload.exe yang diunduh**
+
 
 
 
