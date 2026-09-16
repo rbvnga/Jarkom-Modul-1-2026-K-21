@@ -139,6 +139,7 @@ dan menerapkan beberapa kebijakan akses tertentu pada user Alice, Mika, Eiri**
 # 11
 **Membuktikan kelemahan protokol telnet dengan membuat akun baru pada layanan telnetd di node Chisa, lalu menunjukkan kredensial plain text**
 - Membuat akun Phantom_user dan men-setting password nya wired_ghost
+  
 - Menyalakan telnetd
   ```
 telnetd -l /bin/login &
