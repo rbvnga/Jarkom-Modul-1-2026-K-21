@@ -6,7 +6,7 @@
 | Najla Tufailah  | 5027251078  | 
 
 # 1 2 - Membangun The Wired
-**Membuat 3 Switch/Gateway dimana,kelima entitas ini di konfigurasi sebagai client di GNS3, lalu mengkonfigurasi router lain agar daoat tersembung ke internet publik NAT/DHCP pada interface eth0**
+**Membuat 3 Switch/Gateway dimana, kelima entitas ini di konfigurasi sebagai client di GNS3, lalu mengkonfigurasi router lain agar daoat tersembung ke internet publik NAT/DHCP pada interface eth0**
 - Switch 1 menuju Alice dan Mika
 - Switch 2 menuju Chisa
 - Switch 3 menuju Knights dan Eiri
@@ -104,7 +104,7 @@ iface eth0 inet static
 
 
 # 3
-**Memastikan selukurh entitas (client) di bawah Switch 1, Switch 2, Switch 3 dapat saling terhubung dan berkomunikasi satu sama lain**
+**Memastikan seluruh entitas (client) di bawah Switch 1, Switch 2, Switch 3 dapat saling terhubung dan berkomunikasi satu sama lain**
 ## Alice ke Client Lain 
 <img width="700" height="500" alt="image" src="https://github.com/user-attachments/assets/151db998-8dc9-4dc9-9fbb-7d0fb40f115b" />
 
