@@ -182,13 +182,190 @@ LAIN ADMIN
 <img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
 LAIN ADMIN-HTTPSTREAM
 <img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
-
+Hal-Hal yang ditemukan
+| Nama | NRP | 
+|----------|----------|
+| Penyerang  | 172.26.7.50  | 
+| Server  |  172.26.7.100 | 
 Cek Validasi di console Client (Alice)
 ```
 nc 10.4.89.246 3401
 ```
 <img width="1626" height="864" alt="image" src="https://github.com/user-attachments/assets/bb33e32d-95dc-4a86-ab0c-dc39d3e75e51" />
-Dari hasil analisis dan validasi ini di peroleh flag : `KOMJAR26{W1r3d_Brut3_H0yZsExJta1BCs3ArnWVuPx21}` 
+Dari hasil analisis dan validasi ini di peroleh flag : ```KOMJAR26{W1r3d_Brut3_H0yZsExJta1BCs3ArnWVuPx21}``` 
+# 15
+****
+### 15.1 Menggunakan filter `usb.idVendor and usb.idProduct` pada wireShark <br>
+Filter ini menemukan satu paket dengan info **"GET DESCRIPTOR Response DEVICE"** (Frame 2). Paket ini dikirim oleh device (`1794.0.0`) ke host sebagai respons atas permintaan deskriptor USB saat proses enumerasi.
+<img width="1510" height="1534" alt="Screenshot 2026-09-17 001130" src="https://github.com/user-attachments/assets/9954b390-f0f7-434d-a14f-90089d55c7a6" /> <br>
+Pada panel detail, di-expand bagian **DEVICE DESCRIPTOR**, ditemukan:
+ 
+```
+idVendor:  Logitech, Inc. (0x046d)
+idProduct: Keyboard K120 (0xc31c)
+```
+Setiap perangkat USB memiliki deskriptor device yang dikirim ke host saat pertama kali disambungkan (proses enumerasi). Deskriptor ini berisi metadata perangkat, termasuk Vendor ID (identitas pabrikan) dan Product ID (identitas model produk). Wireshark secara otomatis mencocokkan kedua ID ini dengan database USB-IF sehingga langsung menampilkan nama pabrikan dan nama produknya. <br>
+
+### 15.2 Identifikasi Alamat Device USB
+ 
+Untuk mencari address permanen yang di-assign ke keyboard (bukan address sementara `0` yang dipakai saat proses enumerasi awal), dilakukan dua langkah verifikasi:
+ 
+**a. Melalui kolom Source pada paket interrupt (data keystroke):**
+```
+usb.capdata
+``` 
+Paket-paket hasil filter menunjukkan kolom **Source** berformat `bus.device.endpoint`, contoh:
+
+```
+Source: 2.7.1
+```
+Dari format ini:
+- Bus = 2
+- **Device address = 7**
+- Endpoint = 1
+Saat device USB pertama kali terhubung, ia sementara menggunakan address `0` selama proses enumerasi (pertukaran deskriptor). Setelah host mengenali device melalui deskriptor tersebut, host mengirim permintaan `SET_ADDRESS` untuk menetapkan address permanen . <br>
+
+### 15.3 Ekstraksi Data Keystroke (HID Report)
+ 
+Filter untuk mengisolasi seluruh paket yang membawa data keystroke:
+ 
+```
+usb.capdata
+```
+ 
+Filter ini mengembalikan 60 dari 85 total paket dalam capture. Untuk mengekstrak seluruh payload byte HID
+```
+"C:\Program Files\Wireshark\tshark.exe" -r "C:\Users\User\OneDrive\Documents\soal15_wired_usb_hid.pcap" -Y "usb.capdata" -T fields -e frame.number -e usb.capdata
+```
+Hasil Output : <br>
+```
+26      02001a0000000000
+27      0000000000000000
+28      00000c0000000000
+29      0000000000000000
+30      0000150000000000
+31      0000000000000000
+32      0000080000000000
+33      0000000000000000
+34      0000070000000000
+35      0000000000000000
+36      02002d0000000000
+37      0000000000000000
+38      0200130000000000
+39      0000000000000000
+40      0000150000000000
+41      0000000000000000
+42      0000120000000000
+43      0000000000000000
+44      0000170000000000
+45      0000000000000000
+46      0000120000000000
+47      0000000000000000
+48      0000060000000000
+49      0000000000000000
+50      0000120000000000
+51      0000000000000000
+52      00000f0000000000
+53      0000000000000000
+54      02002d0000000000
+55      0000000000000000
+56      0000240000000000
+57      0000000000000000
+58      02002d0000000000
+59      0000000000000000
+60      00000c0000000000
+61      0000000000000000
+62      0000160000000000
+63      0000000000000000
+64      02002d0000000000
+65      0000000000000000
+66      0000040000000000
+67      0000000000000000
+68      00000f0000000000
+69      0000000000000000
+70      00000c0000000000
+71      0000000000000000
+72      0000190000000000
+73      0000000000000000
+74      0000080000000000
+75      0000000000000000
+76      02002d0000000000
+77      0000000000000000
+78      00001f0000000000
+79      0000000000000000
+80      0000270000000000
+81      0000000000000000
+82      00001f0000000000
+83      0000000000000000
+84      0000230000000000
+85      0000000000000000
+```
+Setiap baris hasil ekstraksi merepresentasikan satu HID Report sepanjang 8 byte dengan format:
+ 
+```
+[byte0: modifier][byte1: reserved][byte2: key1]...[byte7: key6]
+```
+ 
+Baris dengan nilai `0000000000000000` menandakan event **key-release** (tidak ada tombol tertekan) dan diabaikan dalam proses decoding. Baris dengan isi pada byte ketiga (index 2) menandakan tombol yang sedang ditekan (key-press).
+ 
+### 15.4 Decoding Keystroke menjadi Teks
+ 
+Setiap byte key-code dicocokkan dengan tabel **HID Usage ID Keyboard/Keypad Page**:
+ 
+| Kode Hex | Karakter | Kode Hex | Karakter |
+|---|---|---|---|
+| 0x04 | a | 0x13 | p |
+| 0x06 | c | 0x15 | r |
+| 0x07 | d | 0x16 | s |
+| 0x08 | e | 0x17 | t |
+| 0x0C | i | 0x19 | v |
+| 0x0F | l | 0x1A | w |
+| 0x12 | o | 0x1F–0x27 | 2, 3, ... 0 (angka) |
+| 0x2D | - / _ (dengan Shift) | | |
+ 
+Modifier byte `0x02` menandakan **Left Shift** ditekan bersamaan — mengubah huruf menjadi kapital dan mengubah tombol `0x2D` (`-`) menjadi karakter `_`.
+ 
+Hasil decoding baris per baris (frame 26–85):
+ 
+| Frame | Modifier | Key Code | Karakter |
+|---|---|---|---|
+| 26 | 02 | 1a | W |
+| 28 | 00 | 0c | i |
+| 30 | 00 | 15 | r |
+| 32 | 00 | 08 | e |
+| 34 | 00 | 07 | d |
+| 36 | 02 | 2d | _ |
+| 38 | 02 | 13 | P |
+| 40 | 00 | 15 | r |
+| 42 | 00 | 12 | o |
+| 44 | 00 | 17 | t |
+| 46 | 00 | 12 | o |
+| 48 | 00 | 06 | c |
+| 50 | 00 | 12 | o |
+| 52 | 00 | 0f | l |
+| 54 | 02 | 2d | _ |
+| 56 | 00 | 24 | 7 |
+| 58 | 02 | 2d | _ |
+| 60 | 00 | 0c | i |
+| 62 | 00 | 16 | s |
+| 64 | 02 | 2d | _ |
+| 66 | 00 | 04 | a |
+| 68 | 00 | 0f | l |
+| 70 | 00 | 0c | i |
+| 72 | 00 | 19 | v |
+| 74 | 00 | 08 | e |
+| 76 | 02 | 2d | _ |
+| 78 | 00 | 1f | 2 |
+| 80 | 00 | 27 | 0 |
+| 82 | 00 | 1f | 2 |
+| 84 | 00 | 23 | 6 |
+
+### 15.5 Validasi Temuan ke Socket Server
+ 
+```bash
+nc 10.4.89.246 3402
+```
+<img width="1688" height="866" alt="Screenshot 2026-09-17 003945" src="https://github.com/user-attachments/assets/6acecd8a-72bd-4d88-9840-57dcde51a845" />
 
 
 
