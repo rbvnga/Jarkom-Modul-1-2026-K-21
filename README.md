@@ -186,7 +186,9 @@ LAIN ADMIN-HTTPSTREAM
 Cek Validasi di console Client (Alice)
 ```
 nc 10.4.89.246 3401
-``` 
+```
+<img width="1626" height="864" alt="image" src="https://github.com/user-attachments/assets/bb33e32d-95dc-4a86-ab0c-dc39d3e75e51" />
+Dari hasil analisis dan validasi ini di peroleh flag : `KOMJAR26{W1r3d_Brut3_H0yZsExJta1BCs3ArnWVuPx21}` 
 
 
 
