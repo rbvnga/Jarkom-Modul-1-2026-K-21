@@ -422,6 +422,14 @@ QUIT
 ```
 <img width="1222" height="1354" alt="image" src="https://github.com/user-attachments/assets/76a6d265-273b-411e-ab8e-3d1543a620c4" />
 
+YG MENUNJUKKAN IP PENYERANG 
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/209d3f6f-c130-47e2-90b2-46acfa196878" />
+
+HASIL
+<img width="1694" height="864" alt="image" src="https://github.com/user-attachments/assets/2c8b1604-dae0-4f9a-afba-39a2a1c4a87f" />
+
+
+
 
 
 
