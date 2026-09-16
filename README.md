@@ -163,6 +163,9 @@ netstat -tulnp | grep 23
 ****
 Statistics → Conversations → tab IPv4
 <img width="2856" height="1312" alt="image" src="https://github.com/user-attachments/assets/76cef8d2-70f1-49f6-a20f-0eb4f45def0a" />
+Pada Tab ini diketahui ip server (Alice) = 172.26.7.100 — IP ini muncul sebagai "Address B" di semua baris, artinya dia yang menerima koneksi dari 5 IP berbeda. Sedangkan Penyerang (Eiri) = 172.26.7.50
+- 104 packets, 23 kB, data ini jauh lebih besar dari baris lain yang cuma 1-2 packets/~88-230 bytes
+Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke server yang sama menghasilkan traffic jauh lebih besar dibanding koneksi normal
 Untuk Cari Port yang diserang
 <img width="2850" height="1702" alt="image" src="https://github.com/user-attachments/assets/5f65e6ff-c248-416a-9fcc-7390f9a588f7" />
 Filtering
