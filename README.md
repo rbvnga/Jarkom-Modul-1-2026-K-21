@@ -106,7 +106,8 @@ iface eth0 inet static
 # 3
 **Memastikan selukurh entitas (client) di bawah Switch 1, Switch 2, Switch 3 dapat saling terhubung dan berkomunikasi satu sama lain**
 ## Alice ke Client Lain 
-<img width="918" height="948" alt="image" src="https://github.com/user-attachments/assets/151db998-8dc9-4dc9-9fbb-7d0fb40f115b" />
+<img width="700" height="500" alt="image" src="https://github.com/user-attachments/assets/151db998-8dc9-4dc9-9fbb-7d0fb40f115b" />
+
 ## Mika ke Client Lain
 <img width="952" height="776" alt="image" src="https://github.com/user-attachments/assets/71d002bc-71e9-4e5f-a932-aecec0ebd295" />
 
