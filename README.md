@@ -155,6 +155,27 @@ netstat -tulnp | grep 23
 <img width="2536" height="1214" alt="Screenshot 2026-09-15 213208" src="https://github.com/user-attachments/assets/11dfad55-cea8-4318-8c08-d10e27be3cc1" />
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 213059" src="https://github.com/user-attachments/assets/f296c21c-6987-44a7-99ed-3c7178ced695" />
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 213142" src="https://github.com/user-attachments/assets/338a6347-abd2-4664-8b3b-18d9044e5d4e" />
+# 12
+****
+# 13
+****
+# 14
+****
+Statistics → Conversations → tab IPv4
+<img width="2856" height="1312" alt="image" src="https://github.com/user-attachments/assets/76cef8d2-70f1-49f6-a20f-0eb4f45def0a" />
+Untuk Cari Port yang diserang
+<img width="2850" height="1702" alt="image" src="https://github.com/user-attachments/assets/5f65e6ff-c248-416a-9fcc-7390f9a588f7" />
+Filtering
+<img width="2878" height="1710" alt="image" src="https://github.com/user-attachments/assets/11bc1548-08d7-4faa-b090-afa5999de51d" />
+
+HTTP STREAM
+<img width="2876" height="1704" alt="image" src="https://github.com/user-attachments/assets/60da6239-81b9-4890-b657-73a3751854f8" />
+
+LAIN ADMIN 
+<img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
+LAIN ADMIN-HTTPSTREAM
+<img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
+
 
 
 
