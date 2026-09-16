@@ -50,9 +50,9 @@ Menambahkan (`-A`) rule ke tabel NAT, bagian `POSTROUTING` (diterapkan pada pake
 - `iface eth1 inet static` → interface ini pakai IP statis (ditentukan manual, bukan DHCP).
 - `address 10.74.x.x` -> Menunjukkan IP router pada segmen tersebut sekaligus berfungsi sebagai gateway bagi semua client yang ada di switch yang terhubung. <br>
 Garis Besar:
-eth0 → ke arah internet/NAT (dinamis, DHCP)
-eth1 → gateway segmen 1 (statis, 10.10.1.1)
-eth2 → gateway segmen 2 (statis, 10.10.2.1)
+1. eth0 → ke arah internet/NAT (dinamis, DHCP) <br>
+2. eth1 → gateway segmen 1 (statis, 10.10.1.1) <br>
+3. eth2 → gateway segmen 2 (statis, 10.10.2.1) <BR>
 ### Konfigurasi Client Alice
 ```bash
 auto eth0
