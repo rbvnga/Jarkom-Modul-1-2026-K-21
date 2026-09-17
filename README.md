@@ -169,12 +169,13 @@ netstat -tulnp | grep 23
 <img width="2856" height="1312" alt="image" src="https://github.com/user-attachments/assets/76cef8d2-70f1-49f6-a20f-0eb4f45def0a" />
 Pada Tab ini diketahui ip server (Alice) = 172.26.7.100 — IP ini muncul sebagai "Address B" di semua baris, artinya dia yang menerima koneksi dari 5 IP berbeda. Sedangkan Penyerang (Eiri) = 172.26.7.50
 - 104 packets, 23 kB, data ini jauh lebih besar dari baris lain yang cuma 1-2 packets/~88-230 bytes
-Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke server yang sama menghasilkan traffic jauh lebih besar dibanding koneksi normal
+Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke server yang sama menghasilkan traffic jauh lebih besar dibanding koneksi normal <br>
+
 ### 14.2 Mencari Port yang diserang melalui Tab Statistics → Conversations → tab TCP
-<img width="2850" height="1702" alt="image" src="https://github.com/user-attachments/assets/5f65e6ff-c248-416a-9fcc-7390f9a588f7" />
+<img width="2850" height="1702" alt="image" src="https://github.com/user-attachments/assets/5f65e6ff-c248-416a-9fcc-7390f9a588f7" /> <br>
+
 ### 14.3 Filtering
 <img width="2878" height="1710" alt="image" src="https://github.com/user-attachments/assets/11bc1548-08d7-4faa-b090-afa5999de51d" />
-
 ### 14.4 HTTP STREAM
 <img width="2876" height="1704" alt="image" src="https://github.com/user-attachments/assets/60da6239-81b9-4890-b657-73a3751854f8" />
 
@@ -182,12 +183,12 @@ Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke serve
 <img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
 <img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
 Hal-Hal yang ditemukan: 
-| Keterangan | Isi | 
-|----------|----------|
-| IP Penyerang  | 172.26.7.50  | 
-| IP Target  |  172.26.7.100 |
-| Password `lain_admin`  |  wired_pr0tocol_7 | 
-| Software & versi web server  |  Apache 2.6.62 + PHP/8.3.14 | 
+| Hal-Hal yang ditemukan       | Keterangan | Isi                  |
+|------------------------------|------------|----------------------|
+| IP Penyerang                 |            | 172.26.7.50          |
+| IP Target                    |            | 172.26.7.100         |
+| Password `lain_admin`        |            | wired_pr0tocol_7     |
+| Software & versi web server  |            | Apache 2.6.62 + PHP/8.3.14 |
 
 
 ### 14.6 Cek Validasi di console Client (Alice)
