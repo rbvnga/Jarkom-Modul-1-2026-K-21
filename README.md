@@ -241,6 +241,9 @@ netstat -tulnp | grep 23
 ```
 
 - Login dari akun Eiri dengan memasukkan username: Phantom_user dan password: wired_ghost
+<img width="716" height="650" alt="image" src="https://github.com/user-attachments/assets/de28de68-61ab-4de0-8814-5a856107963a" />
+<img width="1398" height="382" alt="image" src="https://github.com/user-attachments/assets/261844da-6000-460b-82c3-3194703af16b" />
+
 - Analisis Wireshark - Filter: telnet
   <img width="2880" height="1700" alt="Screenshot 2026-09-15 212629" src="https://github.com/user-attachments/assets/d40c3c74-4e6b-4c94-bb2c-beb24df5d9a7" />
 - Analisis Wireshark - TCP Stream
