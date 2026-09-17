@@ -165,22 +165,21 @@ netstat -tulnp | grep 23
 **isi soal nya apa**
 # 14
 **Eiri melancarakan serangan bruce-force terhadap form login web Alice. Analisis file `wired_bruteforce.pcapng` untuk menidentifikasi bebrapa hal dan memvalidasi temuan tersebut pada socket server**
-1. Memeriksa Ip Victim dan IP Attacker melalui Tab Statistics → Conversations → tab IPv4 
+### 14.1. Memeriksa Ip Victim dan IP Attacker melalui Tab Statistics → Conversations → tab IPv4 
 <img width="2856" height="1312" alt="image" src="https://github.com/user-attachments/assets/76cef8d2-70f1-49f6-a20f-0eb4f45def0a" />
 Pada Tab ini diketahui ip server (Alice) = 172.26.7.100 — IP ini muncul sebagai "Address B" di semua baris, artinya dia yang menerima koneksi dari 5 IP berbeda. Sedangkan Penyerang (Eiri) = 172.26.7.50
 - 104 packets, 23 kB, data ini jauh lebih besar dari baris lain yang cuma 1-2 packets/~88-230 bytes
 Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke server yang sama menghasilkan traffic jauh lebih besar dibanding koneksi normal
-2. Mencari Port yang diserang melalui Tab Statistics → Conversations → tab TCP
+### 14.2 Mencari Port yang diserang melalui Tab Statistics → Conversations → tab TCP
 <img width="2850" height="1702" alt="image" src="https://github.com/user-attachments/assets/5f65e6ff-c248-416a-9fcc-7390f9a588f7" />
-Filtering
+### 14.3 Filtering
 <img width="2878" height="1710" alt="image" src="https://github.com/user-attachments/assets/11bc1548-08d7-4faa-b090-afa5999de51d" />
 
-HTTP STREAM
+### 14.4 HTTP STREAM
 <img width="2876" height="1704" alt="image" src="https://github.com/user-attachments/assets/60da6239-81b9-4890-b657-73a3751854f8" />
 
-LAIN ADMIN 
+### 14.5 LAIN ADMIN-HTTPSTREAM
 <img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
-LAIN ADMIN-HTTPSTREAM
 <img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
 Hal-Hal yang ditemukan: 
 | Keterangan | Isi | 
@@ -191,7 +190,7 @@ Hal-Hal yang ditemukan:
 | Software & versi web server  |  Apache 2.6.62 + PHP/8.3.14 | 
 
 
-Cek Validasi di console Client (Alice)
+### 14.6 Cek Validasi di console Client (Alice)
 ```
 nc 10.4.89.246 3401
 ```
