@@ -191,6 +191,9 @@ cat /etc/resolv.conf
 ```
 <img width="1674" height="766" alt="Screenshot 2026-09-17 170058" src="https://github.com/user-attachments/assets/20b6c010-07f3-469f-bc87-518a5f138a0b" />
 <img width="1632" height="614" alt="Screenshot 2026-09-17 171205" src="https://github.com/user-attachments/assets/f9dfa156-fbef-4993-a17e-09192a57210e" />
+<img width="1632" height="614" alt="Screenshot 2026-09-17 171205" src="https://github.com/user-attachments/assets/943fea8d-7f44-49a4-903e-8a82bc9ff166" />
+<img width="778" height="328" alt="Screenshot 2026-09-17 171414" src="https://github.com/user-attachments/assets/a690abf7-1f0b-4ed9-8766-373d9b8c803c" />
+<img width="780" height="306" alt="Screenshot 2026-09-17 172053" src="https://github.com/user-attachments/assets/e36ff034-ab21-4915-95b3-5ca40f6e84b9" />
 
 
 
