@@ -378,8 +378,6 @@ unzip protocol7_manifesto.zip
 
 ```
 # 9.3 Mencoba Akses
-<img width="1578" height="84" alt="WhatsApp Image 2026-09-17 at 23 38 29" src="https://github.com/user-attachments/assets/424b2eed-97fb-41fd-bc42-ba3f60c291e6" />
-
 
 ```
 # mencoba akses
