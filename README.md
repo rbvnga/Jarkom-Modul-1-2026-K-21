@@ -422,6 +422,23 @@ Seluruh temuan parameter tersebut telah diinputkan dan divalidasi ke socket serv
 
 <img width="605" height="374" alt="Tangkapan Layar 2026-09-17 pukul 14 34 57" src="https://github.com/user-attachments/assets/006fff49-6988-45fb-af3c-266918d1a75f" />
 
+# 19
+
+Pada nomor ini, analisis dilakukan terhadap file capture ```wired_smtp_threat.pcap``` menggunakan Wireshark untuk mengidentifikasi ancaman email pemerasan via protokol SMTP tanpa enkripsi oleh Eiri.
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 15 10 19" src="https://github.com/user-attachments/assets/3beb0a73-6b16-40ba-aecd-a4158031f1e2" />
+
+Dengan memeriksa detail Internet Message Format dan isi Line-based text data pada paket No. 86, diperoleh seluruh parameter ancaman sebagai berikut:
+- Alamat Email Korban: Email target penyerangan adalah victim@protocol7.co.jp
+- Password Korban: Password milik korban yang diklaim telah bocor oleh penyerang adalah pr0tocol_7_user.
+- Jenis Malware: Perangkat korban diinfeksi menggunakan jenis malware ransomware.
+- Batas Waktu: Penyerang memberikan tenggat waktu pembayaran tebusan selama 3 hari (72 jam).
+- MailClientID: Identitas client pengirim email yang tercantum pada pesan adalah 7719980706
+
+  Seluruh temuan parameter tersebut telah diinputkan dan divalidasi ke socket server melalui perintah nc [IP_Group] 3406 dan terverifikasi berhasil/valid.
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 15 10 11" src="https://github.com/user-attachments/assets/04307c5e-aca2-431c-a4bd-a7d2d25021c7" />
+
+
+
 
 
 
