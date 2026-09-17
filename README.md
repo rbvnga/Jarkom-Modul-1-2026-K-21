@@ -373,7 +373,8 @@ nc 10.4.89.246 3402
 
 # 16
 **Eiri telah memasang malware di server. Analisis lalu lintas FTP untuk mengidentifikasi alamat IP server FTP penyerang, banner software FTP, kredensial login penyerang, serta ukuran (bytes) dari file malware knights_payload.exe yang diunduh**
-### 16.1 Banner Software FTP dan Kredensial login penyerang
+### 16.1 Banner Software FTP
+<img width="2076" height="632" alt="Screenshot 2026-09-17 011841" src="https://github.com/user-attachments/assets/3e3adc35-796c-4fbe-a83e-e4cad621046c" />
 ### 16.2 Mencari Kredensial login penyerang
 Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "USER" or ftp.request.command == "PASS"` 
 <img width="1638" height="542" alt="image" src="https://github.com/user-attachments/assets/eaa9699d-344b-428e-8c7d-d524e2d23971" />
@@ -382,21 +383,66 @@ Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "
 ### 16.
 CARI KNIGHTS 
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/42c95936-cbf7-4305-b671-c4cd7d30ec43" />
+```
+220 Welcome to Wired FTP Server (vsftpd 3.0.5)
 
+USER knights_agent
+
+331 Please specify the password.
+
+PASS N4v1_s3cur3_2026
+
+230 Login successful.
+
+PWD
+
+257 "/" is the current directory
+
+TYPE I
+
+200 Switching to Binary mode.
+
+SIZE knights_payload.exe
+
+213 524288
+
+PASV
+
+227 Entering Passive Mode (198,51,100,7,156,64).
+
+RETR knights_payload.exe
+
+150 Opening BINARY mode data connection for knights_payload.exe (524288 bytes).
+226 Transfer complete.
+
+QUIT
+
+221 Goodbye.
+
+```
 <img width="1222" height="1354" alt="image" src="https://github.com/user-attachments/assets/76a6d265-273b-411e-ab8e-3d1543a620c4" />
-| Temuan | Nilai | 
-|----------|----------|
-| IP Penyerang  | 5027251011  | 
-| Banner Software FTP  | Wired FTP Server (vsftpd 3.0.5)  | 
-| Kredensial Login Penyerang  | Username: knights_agent ; Password: N4v1_s3cur3_2026  | 
-| Ukuran file `knights_payload.exe`  | 524288 bytes  | 
-
 
 YG MENUNJUKKAN IP PENYERANG 
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/209d3f6f-c130-47e2-90b2-46acfa196878" />
 
 HASIL
 <img width="1694" height="864" alt="image" src="https://github.com/user-attachments/assets/2c8b1604-dae0-4f9a-afba-39a2a1c4a87f" />
+
+# 17
+
+Pada nomor 17 ini, analisis dilakukan terhadap file capture wired_http_c2.pcap menggunakan Wireshark untuk mengidentifikasi aktivitas pengunduhan payload berbahaya oleh Eiri pada sistem Alice.
+
+Dengan mengaplikasikan display filter ```http.request || http.response```, ditemukan aktivitas pengunduhan file malware pada paket No. 30 (permintaan GET) dan No. 31 (respons HTTP):
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 14 18 05" src="https://github.com/user-attachments/assets/f2d09f41-3075-4078-8a4b-78c43f152ce7" />
+
+- Nama Domain (Host): Berdasarkan baris Host: pada header HTTP Request paket No. 30,
+nama domain tempat malware diunduh adalah wired-update.net. 
+- Alamat IP Server Penyerang: Pada kolom Destination IP paket No. 30, lokasi server penyerang berada pada IP 203.0.113.42.
+- Nama File Executable Malware: Berdasarkan Request URI pada paket No. 30, nama file executable yang diunduh adalah navi_agent.exe.
+- Kode Status HTTP: Pada paket No. 31, server penyerang mengembalikan kode status 200 (200 OK), yang menandakan file malware berhasil diunduh ke sistem target.
+
+Seluruh temuan parameter tersebut kemudian diinputkan dan divalidasi ke socket server menggunakan perintah nc [IP_Group] 3404 dan dinyatakan berhasil/valid.
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 14 08 51" src="https://github.com/user-attachments/assets/51e66af9-f749-4614-97ea-65cf9112b2eb" />
 
 
 
