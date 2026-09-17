@@ -458,8 +458,23 @@ netstat -tulnp | grep 23
 
 
 # 13
+Pada nomor ini, mengonfigurasi layanan OpenSSH pada node Knights,memasang autentikasi berbasis publik key untuk user mika_admin dari node mika, menerapkan ssh hardening dengan memastikan passworauthentication
 
-**Instal OpenSSH Server pada node knights, lalu buat pasangan kunci SSH (ssh-keygen) pada user mika mika_admin, dan konfigurasikan public key authentication (PasswordAuthentication no). Lakukan koneksi SSH dari node Mika ke node Knights, tangkap sesi menggunakan Wireshark, identifikasi paket Protocol Version Exchange dan Key Exchange, serta jelaskan mengapa kredensial tidak terlihat dalam bentuk teks terbuka seperti pada Telnet.**
+Node Knights (SSH Server):
+- apk add openssh && rc-service sshd start
+- adduser -D mika_admin
+  
+Node Mika(SSH Client):
+- adduser -D mika_admin && su - mika_admin
+- ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""
+- ssh-copy-id mika_admin@10.74.3.2
+
+Hardening di Node Knights (/etc/ssh/sshd_config):
+-PubkeyAuthentication yes
+- PasswordAuthentication no
+- Restart SSH: rc-service sshd restart
+
+Pada nomor ini, analisis dilakukan terhadap file capture wired_tls_decrypt.pcapng dengan mengimpor file Pre-Master-Secret keyslogfile.txt pada konfigurasi TLS Wireshark untuk mendekripsi lalu lintas data yang disembunyikan oleh Eiri.
 # 13.1 
 <img width="1600" height="929" alt="WhatsApp Image 2026-09-16 at 13 56 41" src="https://github.com/user-attachments/assets/c17b85a7-e330-4393-b3eb-26e7e6701c31" />
 
