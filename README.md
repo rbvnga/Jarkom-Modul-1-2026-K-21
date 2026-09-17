@@ -189,12 +189,10 @@ rc-update show | grep local
 cat /etc/local.d/10-dns.start
 cat /etc/resolv.conf
 ```
+<img width="1674" height="766" alt="Screenshot 2026-09-17 170058" src="https://github.com/user-attachments/assets/20b6c010-07f3-469f-bc87-518a5f138a0b" />
+<img width="1632" height="614" alt="Screenshot 2026-09-17 171205" src="https://github.com/user-attachments/assets/f9dfa156-fbef-4993-a17e-09192a57210e" />
 
-![alt text](<Screenshot 2026-09-17 170058.png>)
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+
 
 # 5
 
