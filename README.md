@@ -417,6 +417,35 @@ nama domain tempat malware diunduh adalah wired-update.net.
 Seluruh temuan parameter tersebut kemudian diinputkan dan divalidasi ke socket server menggunakan perintah nc [IP_Group] 3404 dan dinyatakan berhasil/valid.
 <img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 14 08 51" src="https://github.com/user-attachments/assets/51e66af9-f749-4614-97ea-65cf9112b2eb" />
 
+# 18
+
+Pada nomor ini, analisis dilakukan terhadap file captur ```e wired_smb_transfer.pcapng``` menggunakan Wireshark untuk mengidentifikasi aktivitas penanaman file malware menggunakan protokol file sharing SMB oleh Eiri.
+
+<img width="1129" height="420" alt="Tangkapan Layar 2026-09-17 pukul 14 35 18" src="https://github.com/user-attachments/assets/5145199d-b13e-4bd1-8162-b3838bb5fa00" />
+
+Dengan menerapkan display filter smb2, ditemukan aktivitas pemindahan file pada paket No. 16 (Create Request) dan No. 20 (Write Request):
+- Nama Protokol Jaringan: Protokol yang dieksploitasi adalah SMB2 (Server Message Block version 2).
+- IP Pengirim & Penerima: Paket dikirim dari IP penyerang 10.7.3.100 menuju IP korban 10.7.1.50.
+- Folder Tujuan Penyimpanan: Berdasarkan path file pada paket Create Request, file diletakkan pada direktori System32 (melalui share folder ADMIN$).
+- Nama File Executable Malware: File executable yang ditransfer adalah wired_trojan_payload.exe.
+
+Seluruh temuan parameter tersebut telah diinputkan dan divalidasi ke socket server melalui perintah nc [IP_Group] 3405 dan terverifikasi berhasil/valid.
+
+<img width="605" height="374" alt="Tangkapan Layar 2026-09-17 pukul 14 34 57" src="https://github.com/user-attachments/assets/006fff49-6988-45fb-af3c-266918d1a75f" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
 
 
