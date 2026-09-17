@@ -243,6 +243,68 @@ chmod +x traffic_protocol7.sh
 **Chisa mendirikan FTP Server dengan shared folder /var/wired/data
 dan menerapkan beberapa kebijakan akses tertentu pada user Alice, Mika, Eiri**
 
+### 7.1 Konfigurasi
+Untuk memudahkan konfigurasi dibuat script yang berisi: 
+```
+#!/bin/sh
+
+echo "=== Setup Chisa dimulai ==="
+
+# --- DNS Resolver ---
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
+# --- Install vsftpd ---
+apk update
+apk add vsftpd
+
+# --- Buat 3 user pakai BusyBox adduser (selalu tersedia, tidak perlu install) ---
+id alice >/dev/null 2>&1 || adduser -h /var/wired/data -s /sbin/nologin -D alice
+id mika  >/dev/null 2>&1 || adduser -h /var/wired/data -s /sbin/nologin -D mika
+id eiri  >/dev/null 2>&1 || adduser -h /var/wired/data -s /sbin/nologin -D eiri
+
+# --- Buat folder shared ---
+mkdir -p /var/wired/data
+chown alice:alice /var/wired/data
+chmod 755 /var/wired/data
+
+# --- Config utama vsftpd ---
+mkdir -p /etc/vsftpd/user_conf
+cat > /etc/vsftpd/vsftpd.conf << 'CONF'
+listen=YES
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+allow_writeable_chroot=YES
+local_umask=022
+seccomp_sandbox=NO
+userlist_enable=YES
+userlist_deny=YES
+userlist_file=/etc/vsftpd/blocked_users
+user_config_dir=/etc/vsftpd/user_conf
+pasv_enable=YES
+pasv_min_port=30000
+pasv_max_port=30100
+CONF
+
+echo "eiri" > /etc/vsftpd/blocked_users
+
+cat > /etc/vsftpd/user_conf/alice << 'CONF'
+local_root=/var/wired/data
+write_enable=YES
+CONF
+
+cat > /etc/vsftpd/user_conf/mika << 'CONF'
+local_root=/var/wired/data
+write_enable=NO
+CONF
+
+pgrep vsftpd > /dev/null || vsftpd /etc/vsftpd/vsftpd.conf 2>/dev/null &
+
+echo "=== Setup Chisa selesai ==="
+```
+### 7.2 Pembuktian
+
 # 8
 
 **Menganalisis sesi Wireshark ketika Knights mengupload file ke FTP server Chisa**
@@ -298,6 +360,21 @@ Ketiganya sudah lengkap ada di capture:
 # 10
 
 **Mencatat nilai ICMP Type dan Code untuk Echo Request vs Echo Reply, serta analisis packet loss dan RTT (min/avg/max) ketika Knights mengirimkan ping ke node Chisa**
+
+### 10.1 Mengirim Paket
+```
+ping -c 77 -s 128 -i 0.3 10.74.2.2
+```
+### 10.2 Analisis Wireshark Chisa 
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 205043" src="https://github.com/user-attachments/assets/c312130e-f6bb-4651-8f79-f65ce396abe2" />
+### 10.2.1 Analisis Wireshark Chisa - filtering
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 205446" src="https://github.com/user-attachments/assets/2e3d24d3-11df-466d-9438-a09bd7c594d5" />
+### 10.3 Analisis Wireshark Knights
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 205255" src="https://github.com/user-attachments/assets/5c681df8-28a2-4a43-9535-bd73eec30b48" />
+### 10.2.1 Analisis Wireshark Knights - filtering
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 205513" src="https://github.com/user-attachments/assets/7ca5b975-7704-45d3-94f5-05d94a96042c" />
+<img width="2880" height="1712" alt="Screenshot 2026-09-15 205956" src="https://github.com/user-attachments/assets/c96adb60-bd60-4a94-9c3b-c652be422c31" />
+
 
 # 11
 
