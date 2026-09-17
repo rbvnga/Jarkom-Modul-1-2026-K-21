@@ -262,7 +262,34 @@ ftpput -u alice -p alice123 10.74.2.2 knights_report.txt knights_report.txt
 ```
 ### 8.3 Analisis WireShark
 <img width="2486" height="1486" alt="Screenshot 2026-09-15 192713" src="https://github.com/user-attachments/assets/66b788a0-e00b-4fb1-8f32-2a0a26504039" />
+| Baris | Isi |
+|---|---|
+| No. 20 | Request: STOR knights_report.txt ✓ ini perintah upload-nya |
+| No. 27 | Response: 226 Transfer complete. ✓ ini kode sukses-nya |
+| No. 16 | Response: 229 Entering Extended Passive Mode (\|\|\|30051\|) ← ini yang beda |
 
+## Kenapa yang muncul 229, bukan 227?
+
+Client kamu (BusyBox ftpput) pakai perintah EPSV (Extended Passive Mode), bukan PASV biasa — bisa dilihat di baris No. 15: Request: EPSV. EPSV itu versi modern/extended dari PASV, fungsinya sama persis (menegosiasikan port data), cuma formatnya beda dan responsnya pakai kode 229, bukan 227.
+
+## Bedanya di format penulisan port:
+
+- PASV (227) → format (h1,h2,h3,h4,p1,p2), port dihitung manual: (p1×256)+p2
+- EPSV (229) → format lebih simpel: (\|\|\|port\|) — port-nya langsung tertulis, tidak perlu dihitung
+
+Jadi dari baris kamu:
+
+229 Entering Extended Passive Mode (\|\|\|30051\|)
+
+Port data-nya langsung = 30051, tidak perlu rumus apa-apa lagi.
+
+## Kesimpulan untuk laporan kamu
+
+Ketiganya sudah lengkap ada di capture:
+
+- Perintah STOR: STOR knights_report.txt (paket No. 20)
+- Kode status sukses: 226 Transfer complete. (paket No. 27)
+- Port data yang dinegosiasikan: 30051, dari respons 229 Entering Extended Passive Mode (\|\|\|30051\|)
 
 # 9
 
