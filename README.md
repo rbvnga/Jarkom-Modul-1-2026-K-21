@@ -9,9 +9,9 @@
 
 **Membuat 3 Switch/Gateway dimana, kelima entitas ini di konfigurasi sebagai client di GNS3, lalu mengkonfigurasi router lain agar daoat tersembung ke internet publik NAT/DHCP pada interface eth0**
 
-- Switch 1 menuju Alice dan Mika
-- Switch 2 menuju Chisa
-- Switch 3 menuju Knights dan Eiri
+- Switch 1 menuju Alice dan Mika <br>
+- Switch 2 menuju Chisa <br>
+- Switch 3 menuju Knights dan Eiri <br>
 
 <img width="1864" height="1402" alt="image" src="https://github.com/user-attachments/assets/e8639d4e-0fd6-428b-ac60-5742fabf3c76" />
 - Router 1 pusat dengan 3 interface (eth1, eth2, eth3) menuju 3 switch berbeda
@@ -304,6 +304,7 @@ pgrep vsftpd > /dev/null || vsftpd /etc/vsftpd/vsftpd.conf 2>/dev/null &
 echo "=== Setup Chisa selesai ==="
 ```
 ### 7.2 Pembuktian
+<img width="860" height="204" alt="Screenshot 2026-09-18 000109" src="https://github.com/user-attachments/assets/6fb71b0e-a12d-4f7a-91f1-f7c20ea8c0ce" />
 
 # 8
 
