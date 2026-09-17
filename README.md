@@ -374,23 +374,20 @@ nc 10.4.89.246 3402
 # 16
 **Eiri telah memasang malware di server. Analisis lalu lintas FTP untuk mengidentifikasi alamat IP server FTP penyerang, banner software FTP, kredensial login penyerang, serta ukuran (bytes) dari file malware knights_payload.exe yang diunduh**
 ### 16.1 Mencari Kredensial login penyerang
-Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "USER" or ftp.request.command == "PASS"` 
+Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "USER" or ftp.request.command == "PASS"` . Filter ini akan mengisolasi hanya paket-paket request login FTP dari seluruh trafik campuran di file capture ini.
 
-Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "USER" or ftp.request.command == "PASS"` 
 <img width="1638" height="542" alt="image" src="https://github.com/user-attachments/assets/eaa9699d-344b-428e-8c7d-d524e2d23971" />
 
 
 ### 16.2 Mencari IP FTP Server (Destination)
+filter  `ftp.request.command == "RETR"` akan menemukan command download file yang spesifik menyasar file malware knights_payload.exe.
 
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/42c95936-cbf7-4305-b671-c4cd7d30ec43" />
 
 <img width="1222" height="1354" alt="image" src="https://github.com/user-attachments/assets/76a6d265-273b-411e-ab8e-3d1543a620c4" />
 
-
- 
-<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/209d3f6f-c130-47e2-90b2-46acfa196878" />\
-Informasi ynag diperoleh
-| Nama | NRP | 
+Informasi yang diperoleh
+| Temuan | Nilai | 
 |----------|----------|
 | IP FTP Sever  | 198.51.100.7  | 
 |  Banner Software  | Wired FTP Server (vsftpd 3.0.5) | 
