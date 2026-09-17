@@ -373,7 +373,7 @@ nc 10.4.89.246 3402
 
 # 16
 **Eiri telah memasang malware di server. Analisis lalu lintas FTP untuk mengidentifikasi alamat IP server FTP penyerang, banner software FTP, kredensial login penyerang, serta ukuran (bytes) dari file malware knights_payload.exe yang diunduh**
-### 16.1 Banner Software FTP
+### 16.1 Banner Software FTP dan Kredensial login penyerang
 <img width="2076" height="632" alt="Screenshot 2026-09-17 011841" src="https://github.com/user-attachments/assets/3e3adc35-796c-4fbe-a83e-e4cad621046c" />
 ### 16.2 Mencari Kredensial login penyerang
 Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "USER" or ftp.request.command == "PASS"` 
@@ -385,42 +385,32 @@ CARI KNIGHTS
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/42c95936-cbf7-4305-b671-c4cd7d30ec43" />
 ```
 220 Welcome to Wired FTP Server (vsftpd 3.0.5)
-
 USER knights_agent
-
 331 Please specify the password.
-
 PASS N4v1_s3cur3_2026
-
 230 Login successful.
-
 PWD
-
 257 "/" is the current directory
-
 TYPE I
-
 200 Switching to Binary mode.
-
 SIZE knights_payload.exe
-
 213 524288
-
 PASV
-
 227 Entering Passive Mode (198,51,100,7,156,64).
-
 RETR knights_payload.exe
-
 150 Opening BINARY mode data connection for knights_payload.exe (524288 bytes).
 226 Transfer complete.
-
 QUIT
-
 221 Goodbye.
-
 ```
 <img width="1222" height="1354" alt="image" src="https://github.com/user-attachments/assets/76a6d265-273b-411e-ab8e-3d1543a620c4" />
+| Temuan | Nilai | 
+|----------|----------|
+| IP Penyerang  | 5027251011  | 
+| Banner Software FTP  | Wired FTP Server (vsftpd 3.0.5)  | 
+| Kredensial Login Penyerang  | Username: knights_agent ; Password: N4v1_s3cur3_2026  | 
+| Ukuran file `knights_payload.exe`  | 524288 bytes  | 
+
 
 YG MENUNJUKKAN IP PENYERANG 
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/209d3f6f-c130-47e2-90b2-46acfa196878" />
