@@ -383,43 +383,7 @@ Hal ini dapat dicari dengan memfilter Wireshark dengan `ftp.request.command == "
 ### 16.
 CARI KNIGHTS 
 <img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/42c95936-cbf7-4305-b671-c4cd7d30ec43" />
-```
-220 Welcome to Wired FTP Server (vsftpd 3.0.5)
 
-USER knights_agent
-
-331 Please specify the password.
-
-PASS N4v1_s3cur3_2026
-
-230 Login successful.
-
-PWD
-
-257 "/" is the current directory
-
-TYPE I
-
-200 Switching to Binary mode.
-
-SIZE knights_payload.exe
-
-213 524288
-
-PASV
-
-227 Entering Passive Mode (198,51,100,7,156,64).
-
-RETR knights_payload.exe
-
-150 Opening BINARY mode data connection for knights_payload.exe (524288 bytes).
-226 Transfer complete.
-
-QUIT
-
-221 Goodbye.
-
-```
 <img width="1222" height="1354" alt="image" src="https://github.com/user-attachments/assets/76a6d265-273b-411e-ab8e-3d1543a620c4" />
 
 YG MENUNJUKKAN IP PENYERANG 
