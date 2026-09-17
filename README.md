@@ -188,8 +188,8 @@ Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke serve
 nc 10.4.89.246 3401
 ```
 <img width="1626" height="864" alt="image" src="https://github.com/user-attachments/assets/bb33e32d-95dc-4a86-ab0c-dc39d3e75e51" />
-Dari hasil analisis dan validasi ini di peroleh flag : ```KOMJAR26{W1r3d_Brut3_H0yZsExJta1BCs3ArnWVuPx21}``` 
-# 15
+
+# 15 
 **Eiri telah memasang perangkat berbahaya pad anode Alice. Identifikasi Vendor ID dan Product ID perangkat USB, alamat nomor device USB, Serta pesan rahasia dari keystroke yang didapatkan**
 ### 15.1 Menggunakan filter `usb.idVendor and usb.idProduct` pada wireShark <br>
 Filter ini menemukan satu paket dengan info **"GET DESCRIPTOR Response DEVICE"** (Frame 2). Paket ini dikirim oleh device (`1794.0.0`) ke host sebagai respons atas permintaan deskriptor USB saat proses enumerasi.
