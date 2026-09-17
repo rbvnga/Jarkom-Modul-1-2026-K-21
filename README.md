@@ -438,6 +438,23 @@ Dengan memeriksa detail Internet Message Format dan isi Line-based text data pad
 <img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 15 10 11" src="https://github.com/user-attachments/assets/04307c5e-aca2-431c-a4bd-a7d2d25021c7" />
 
 
+# 20
+Pada nomor ini, analisis dilakukan terhadap file capture ```wired_tls_decrypt.pcapng``` dengan mengimpor file Pre-Master-Secret keyslogfile.txt pada konfigurasi TLS Wireshark untuk mendekripsi lalu lintas data yang disembunyikan oleh Eiri.
+
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 15 39 10" src="https://github.com/user-attachments/assets/b3d1fe45-0f51-46f1-a067-ce9cc9191c33" />
+
+Setelah proses dekripsi berhasil, diperoleh detail parameter sebagai berikut:
+- Versi Protokol TLS: Protokol TLS yang dinegosiasikan adalah TLSv1.2.
+- Nama Domain (SNI): Server Name Indication yang diakses oleh client adalah example.com.
+- Alamat IP Server HTTPS: Lokasi IP server penyerang berada pada 93.184.216.34.
+- User-Agent: String User-Agent yang digunakan oleh client adalah curl/7.62.0.
+- HTTP Request Method & Path: Metode permintaan yang digunakan adalah HEAD dengan lokasi path /.
+Seluruh temuan parameter tersebut telah diinputkan dan divalidasi ke socket server melalui perintah nc [IP_Group] 3407 dan terverifikasi berhasil/valid.
+
+<img width="1470" height="956" alt="Tangkapan Layar 2026-09-17 pukul 15 33 54" src="https://github.com/user-attachments/assets/4053a924-e6df-4de3-8257-bc4f9f972a41" />
+
+
+
 
 
 
