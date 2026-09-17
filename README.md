@@ -354,8 +354,46 @@ Ketiganya sudah lengkap ada di capture:
 - Port data yang dinegosiasikan: 30051, dari respons 229 Entering Extended Passive Mode (\|\|\|30051\|)
 
 # 9
+**Mika akses file yang diberikan dari FTP Server Chisa dan mengunduhnya dan buktikan pembatasan read-only mika**
+# 9.1 Mencoba Upload
+```
+ftpput -u mika -p mika123 10.74.2.2 percobaan_mika.txt percobaan_mika.txt
+```
+Hasilnya: 
 
----
+
+Analisis Wireshark
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 202520" src="https://github.com/user-attachments/assets/f69b46a7-b7d5-49e0-a57c-050ff6f5cd36" />
+
+# 9.2 Chisa Mendownload file yang diberikan 
+```
+wget --no-check-certificate \
+  "https://drive.google.com/uc?export=download&id=1tKZu0rcti4t-fXX4jtXDSKDBWzsawfoN" \
+  -O protocol7_manifesto.zip
+
+unzip protocol7_manifesto.zip
+
+```
+# 9.1 Mencoba Akses
+
+```
+# mencoba akses
+ftpget -u mika -p mika123 10.74.2.2 protocol7_manifesto.txt protocol7_manifesto.txt
+
+# cek verivikasi
+ls -la protocol7_manifesto.txt
+```
+Hasilnya
+<img width="1764" height="120" alt="Screenshot 2026-09-15 202708" src="https://github.com/user-attachments/assets/85dbb9b4-bfef-4cf2-a69e-8f8d2447a7a9" />
+
+```
+cat protocol7_manifesto.txt
+```
+Hasilnya
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 202811" src="https://github.com/user-attachments/assets/f918f1f7-6178-4de5-9a3f-a88c12e6b7c0" />
+
+Analisis Wiresharak
+<img width="2880" height="1800" alt="Screenshot 2026-09-15 203039" src="https://github.com/user-attachments/assets/7f28b495-8868-41c7-a257-293e92f60bbb" />
 
 # 10
 
@@ -413,9 +451,15 @@ netstat -tulnp | grep 23
 - port 80 (HTTP) dalam keadaan terbuka
 - Port (rahasia) 7777 dalam keadaan tertutup
 
+<img width="1600" height="1041" alt="WhatsApp Image 2026-09-16 at 11 24 05" src="https://github.com/user-attachments/assets/b1c0da49-e0e8-4796-a843-e8eda6379ebf" />
+
+
 # 13
 
-**isi soal nya apa**
+**Instal OpenSSH Server pada node knights, lalu buat pasangan kunci SSH (ssh-keygen) pada user mika mika_admin, dan konfigurasikan public key authentication (PasswordAuthentication no). Lakukan koneksi SSH dari node Mika ke node Knights, tangkap sesi menggunakan Wireshark, identifikasi paket Protocol Version Exchange dan Key Exchange, serta jelaskan mengapa kredensial tidak terlihat dalam bentuk teks terbuka seperti pada Telnet.**
+# 13.1 
+<img width="1600" height="929" alt="WhatsApp Image 2026-09-16 at 13 56 41" src="https://github.com/user-attachments/assets/c17b85a7-e330-4393-b3eb-26e7e6701c31" />
+
 
 # 14
 
