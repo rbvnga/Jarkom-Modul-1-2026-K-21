@@ -182,7 +182,6 @@ Ini pola khas brute force dimana ratusan percobaan login berturut-turut ke serve
 ### 14.5 LAIN ADMIN-HTTPSTREAM
 <img width="2880" height="1706" alt="image" src="https://github.com/user-attachments/assets/75ad14d1-3736-473a-ab8a-7e949639ad4a" />
 <img width="2856" height="1704" alt="image" src="https://github.com/user-attachments/assets/58ea5c28-d120-41f2-ba21-e3a61d1a3131" />
-Hal-Hal yang ditemukan: <br>
 | Hal-Hal yang ditemukan       | Keterangan | Isi                  |
 |------------------------------|------------|----------------------|
 | IP Penyerang                 |            | 172.26.7.50          |
