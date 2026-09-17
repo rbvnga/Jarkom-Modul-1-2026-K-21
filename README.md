@@ -362,6 +362,7 @@ ftpput -u mika -p mika123 10.74.2.2 percobaan_mika.txt percobaan_mika.txt
 Hasilnya: 
 
 
+
 Analisis Wireshark
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 202520" src="https://github.com/user-attachments/assets/f69b46a7-b7d5-49e0-a57c-050ff6f5cd36" />
 
