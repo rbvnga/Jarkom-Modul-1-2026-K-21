@@ -199,11 +199,44 @@ cat /etc/resolv.conf
 
 # 5
 
-**Memastikan seluruh kondigurasi jaringan, dengan membuat script verivikasi**
+**Memastikan seluruh konfigurasi jaringan, dengan membuat script verivikasi**
+<img width="1076" height="948" alt="image" src="https://github.com/user-attachments/assets/c613b72a-a4f2-4991-be27-4114a5025385" />
+Untuk memastikan konfigurasi jaringan tersebut dibuat script dalam node Router yang berisi
+```
+#!/bin/bash
+echo "=== Ringkasan Interface ==="
+ip -br a
+echo ""
+echo "=== Status Tabel NAT ==="
+iptables -t nat -L -v -n
+```
+
 
 # 6
 
 **Menyaring paket yang berprotokol DNS atau ICMP melalui Wireshark pada interface node Mika**
+### 6.1 Mendownload traffic generator
+# Mendownload zip di dalam drive
+```
+wget --no-check-certificate \
+  "https://drive.google.com/uc?export=download&id=1G9zIi20ofbOgfffor-i-e7QKU3Ihe42W" \
+  -O traffic_protocol7.zip
+```
+### 6.2 Me-unzip dan jalankan traffic generator
+```
+# unzip 
+unzip traffic_protocol7.zip
+
+# Mengatur Eksekusi 
+chmod +x traffic_protocol7.sh
+
+# Menjalankan traffic untuk di analisis
+./traffic_protocol7.sh
+```
+
+### 6.3 Ketika Paket dikirimkan 
+<img width="1347" height="1365" alt="WhatsApp Image 2026-09-17 at 22 22 54" src="https://github.com/user-attachments/assets/4cc48cd7-9b42-4cb6-8b8f-5b8915134f0e" />
+
 
 # 7
 
@@ -213,6 +246,23 @@ dan menerapkan beberapa kebijakan akses tertentu pada user Alice, Mika, Eiri**
 # 8
 
 **Menganalisis sesi Wireshark ketika Knights mengupload file ke FTP server Chisa**
+### 8.1 Mendownload file yang diberikan untuk di upload
+```
+# Jalankan dari Console Knights
+wget --no-check-certificate \
+  "https://drive.google.com/uc?export=download&id=1lFepK4wFmx55PnRki3NsHW-ivudSR0vg" \
+  -O knights_report.zip
+
+unzip knights_report.zip
+```
+
+### 8.2 Mengupload file dari Knights ke Chisa
+```
+ftpput -u alice -p alice123 10.74.2.2 knights_report.txt knights_report.txt
+```
+### 8.3 Analisis WireShark
+<img width="2486" height="1486" alt="Screenshot 2026-09-15 192713" src="https://github.com/user-attachments/assets/66b788a0-e00b-4fb1-8f32-2a0a26504039" />
+
 
 # 9
 
