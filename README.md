@@ -325,6 +325,10 @@ user_config_dir=/etc/vsftpd/user_conf   → folder berisi config KHUSUS per-user
 pasv_enable=YES + pasv_min/max_port     → mode Passive FTP, port data 30000-30100
 ```
 ### 7.3 Pembuktian
+
+```
+ftpput -u alice -p alice123 10.74.2.2 signal_alice.txt signal_alice.txt
+```
 <img width="860" height="204" alt="Screenshot 2026-09-18 000109" src="https://github.com/user-attachments/assets/6fb71b0e-a12d-4f7a-91f1-f7c20ea8c0ce" />
 
 # 8
