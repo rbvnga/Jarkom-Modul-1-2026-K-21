@@ -237,6 +237,11 @@ chmod +x traffic_protocol7.sh
 ### 6.3 Ketika Paket dikirimkan 
 <img width="1347" height="1365" alt="WhatsApp Image 2026-09-17 at 22 22 54" src="https://github.com/user-attachments/assets/4cc48cd7-9b42-4cb6-8b8f-5b8915134f0e" />
 
+<img width="909" height="575" alt="Tangkapan Layar 2026-09-20 pukul 17 48 49" src="https://github.com/user-attachments/assets/d51940a3-eaa3-408c-a8b1-b13a9648aaf3" />
+
+<img width="925" height="579" alt="Tangkapan Layar 2026-09-20 pukul 17 49 08" src="https://github.com/user-attachments/assets/6f851d2e-d4d7-479b-b2f8-8c456fe2c72c" />
+
+
 
 # 7
 
