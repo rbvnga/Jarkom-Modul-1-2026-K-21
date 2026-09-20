@@ -486,7 +486,8 @@ netstat -tulnp | grep 23
 - port 80 (HTTP) dalam keadaan terbuka
 - Port (rahasia) 7777 dalam keadaan tertutup
 
-<img width="1600" height="1041" alt="WhatsApp Image 2026-09-16 at 11 24 05" src="https://github.com/user-attachments/assets/b1c0da49-e0e8-4796-a843-e8eda6379ebf" />
+<img width="685" height="449" alt="Tangkapan Layar 2026-09-20 pukul 18 44 12" src="https://github.com/user-attachments/assets/481fb356-e190-4ac1-a11b-5246fcf7e77a" />
+
 
 
 # 13
