@@ -354,7 +354,7 @@ ftpput -u alice -p alice123 10.74.2.2 knights_report.txt knights_report.txt
 | ------ | ------------------------------------------------------------------- |
 | No. 20 | Request: STOR knights_report.txt ✓ ini perintah upload-nya          |
 | No. 27 | Response: 226 Transfer complete. ✓ ini kode sukses-nya              |
-| No. 16 | Response: 229 Entering Extended Passive Mode (|||30051|)            |
+| No. 16 | Response: 229 Entering Extended Passive Mode                        |
 
 
 ## Kenapa yang muncul 229, bukan 227?
