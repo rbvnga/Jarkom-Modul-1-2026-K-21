@@ -236,14 +236,40 @@ chmod +x traffic_protocol7.sh
 
 ### 6.3 Ketika Paket dikirimkan 
 <img width="1347" height="1365" alt="WhatsApp Image 2026-09-17 at 22 22 54" src="https://github.com/user-attachments/assets/4cc48cd7-9b42-4cb6-8b8f-5b8915134f0e" />
+<img width="2880" height="1702" alt="image" src="https://github.com/user-attachments/assets/25a7af3e-0bca-45eb-8ff6-ade6a1a8915a" />
+<img width="2880" height="1704" alt="image" src="https://github.com/user-attachments/assets/705ab0ce-c82c-4fde-a1da-0586556224e5" />
 
-<img width="909" height="575" alt="Tangkapan Layar 2026-09-20 pukul 17 48 49" src="https://github.com/user-attachments/assets/d51940a3-eaa3-408c-a8b1-b13a9648aaf3" />
 
-<img width="925" height="579" alt="Tangkapan Layar 2026-09-20 pukul 17 49 08" src="https://github.com/user-attachments/assets/6f851d2e-d4d7-479b-b2f8-8c456fe2c72c" />
 Hasil: Terdapat 33 Paket dengan protocol ICMP dan DNS
 <img width="2260" height="482" alt="image" src="https://github.com/user-attachments/assets/efed3a9e-7a84-4cbb-a17c-4141249e2d94" />
 <img width="2810" height="1686" alt="image" src="https://github.com/user-attachments/assets/9b72cd7f-604c-40e2-9da5-a93e68ebb15e" />
-
+ ## Protocol Hierarchy Statistics
+ 
+Berdasarkan `Statistics > Protocol Hierarchy`, dari total **41 paket** yang tercapture, didapatkan distribusi sebagai berikut:
+ 
+| Protokol | Jumlah Paket | Persentase |
+|---|---|---|
+| Domain Name System (DNS) | 16 | 39.0% |
+| Internet Control Message Protocol (ICMPv4) | 20 | 48.8% |
+| Internet Control Message Protocol v6 (ICMPv6) | 1 | 2.4% |
+| Address Resolution Protocol (ARP) | 4 | 9.8% |
+ 
+Dari data ini, paket yang **lolos filter `dns or icmp`** adalah gabungan DNS + ICMPv4 + ICMPv6:
+ 
+```
+16 + 20 + 1 = 37 paket (90.2% dari total 41 paket)
+```
+ 
+Sisanya 4 paket (9.8%) adalah trafik ARP yang **tidak lolos** filter karena bukan bagian dari protokol DNS maupun ICMP — ARP hanya dipakai untuk resolusi alamat MAC di jaringan lokal, sehingga secara benar tersaring keluar.
+ 
+## Conversations (IPv4)
+ 
+Berdasarkan `Statistics > Conversations` tab IPv4 dengan opsi **"Limit to display filter"** dicentang, ditemukan 2 percakapan (conversation) yang sesuai filter `dns or icmp`:
+ 
+| Address A | Address B | Packets | Bytes | Keterangan |
+|---|---|---|---|---|
+| 10.74.1.3 (Mika) | 1.1.1.1 | 16 | 2 kB | DNS resolver (Cloudflare) |
+| 10.74.1.3 (Mika) | 8.8.8.8 | 20 | 2 kB | ICMP (Google Public DNS/ping target) |
 
 
 
