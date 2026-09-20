@@ -241,6 +241,10 @@ chmod +x traffic_protocol7.sh
 
 <img width="925" height="579" alt="Tangkapan Layar 2026-09-20 pukul 17 49 08" src="https://github.com/user-attachments/assets/6f851d2e-d4d7-479b-b2f8-8c456fe2c72c" />
 Hasil: Terdapat 33 Paket dengan protocol ICMP dan DNS
+<img width="2260" height="482" alt="image" src="https://github.com/user-attachments/assets/efed3a9e-7a84-4cbb-a17c-4141249e2d94" />
+<img width="2810" height="1686" alt="image" src="https://github.com/user-attachments/assets/9b72cd7f-604c-40e2-9da5-a93e68ebb15e" />
+
+
 
 
 # 7
