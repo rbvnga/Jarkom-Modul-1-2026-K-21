@@ -546,8 +546,9 @@ netstat -tulnp | grep 23
 ```
 Perintah `telnetd -l /bin/login` menjalankan daemon Telnet dan mengarahkan proses autentikasi ke `/bin/login` (program login standar Linux), sedangkan `netstat -tulnp | grep 23` digunakan untuk memverifikasi bahwa port 23 (port default Telnet) sudah dalam status `LISTEN`.
 - Login dari akun Eiri dengan memasukkan username: Phantom_user dan password: wired_ghost
-<img width="716" height="650" alt="image" src="https://github.com/user-attachments/assets/de28de68-61ab-4de0-8814-5a856107963a" />
 <img width="1398" height="382" alt="image" src="https://github.com/user-attachments/assets/261844da-6000-460b-82c3-3194703af16b" />
+<img width="716" height="650" alt="image" src="https://github.com/user-attachments/assets/de28de68-61ab-4de0-8814-5a856107963a" />
+
 
 - Analisis Wireshark - Filter: telnet
   <img width="2880" height="1700" alt="Screenshot 2026-09-15 212629" src="https://github.com/user-attachments/assets/d40c3c74-4e6b-4c94-bb2c-beb24df5d9a7" />
@@ -565,11 +566,11 @@ Ini membuktikan bahwa siapa pun yang menyadap trafik jaringan — baik lewat MIT
  
 Ini adalah karakteristik desain protokol Telnet itu sendiri, bukan sekadar hasil capture yang kebetulan terpecah. Alasannya:
  
-1. **Mode karakter-per-karakter (character-at-a-time mode)**
+1. **Mode karakter-per-karakter (character-at-a-time mode)** <br>
    Secara default, Telnet beroperasi dalam mode di mana setiap tombol yang ditekan client langsung dikirim ke server **satu per satu**, saat itu juga — bukan dikumpulkan dulu menjadi satu baris penuh baru dikirim (line-mode/buffered). Tujuannya supaya server bisa langsung memproses input secara real-time, termasuk untuk keperluan seperti auto-complete atau kontrol interaktif di sisi server.
-2. **Remote echo, bukan local echo**
+2. **Remote echo, bukan local echo** <br>
    Karena Telnet umumnya menggunakan *remote echo* (server yang menampilkan balik karakter yang diketik client, bukan client sendiri yang menampilkannya secara lokal), setiap karakter **harus** dikirim ke server dahulu, baru server mengirim balik karakter itu untuk ditampilkan di layar client. Ini otomatis membuat proses input jadi granular per karakter, bukan per baris.
-3. **Tidak ada buffering di layer aplikasi**
+3. **Tidak ada buffering di layer aplikasi** <br>
    Karena Telnet tidak melakukan buffering (berbeda dengan protokol lain yang menunggu Enter/newline baru mengirim seluruh baris), setiap keystroke langsung dibungkus jadi payload TCP kecil dan dikirim independen. Alhasil, dalam capture Wireshark, kita bisa melihat puluhan paket kecil berurutan — masing-masing cuma berisi 1 byte data — mewakili satu huruf dari `phantom_user` atau `wired_ghost`.
 Karakteristik inilah yang justru mempermudah proses pembuktian di Follow TCP Stream: karena tiap paket kecil ini direkonstruksi ulang secara berurutan oleh Wireshark menjadi satu aliran teks yang utuh dan terbaca, kredensial korban jadi terlihat gamblang tanpa perlu decoding atau dekripsi apa pun.
 # 12
