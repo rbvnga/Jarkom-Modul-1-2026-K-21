@@ -351,7 +351,7 @@ ftpput -u alice -p alice123 10.74.2.2 knights_report.txt knights_report.txt
 ### 8.3 Analisis WireShark
 <img width="2486" height="1486" alt="Screenshot 2026-09-15 192713" src="https://github.com/user-attachments/assets/66b788a0-e00b-4fb1-8f32-2a0a26504039" />
 | Baris | Isi |
-| ---- | ---- |
+| ----- | -- |
 | No. 20 | Request: STOR knights_report.txt ✓ ini perintah upload-nya |
 | No. 27 | Response: 226 Transfer complete. ✓ ini kode sukses-nya |
 | No. 16 | Response: 229 Entering Extended Passive Mode (\|\|\|30051\|) ← ini yang beda |
