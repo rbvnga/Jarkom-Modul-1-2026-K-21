@@ -361,7 +361,8 @@ Ketiganya sudah lengkap ada di capture:
 ftpput -u mika -p mika123 10.74.2.2 percobaan_mika.txt percobaan_mika.txt
 ```
 Hasilnya: 
-<img width="1578" height="84" alt="WhatsApp Image 2026-09-17 at 23 38 27" src="https://github.com/user-attachments/assets/df5c6857-b61b-45b8-a976-df9fcd815ba4" />
+<img width="1578" height="84" alt="Screenshot 2026-09-17 233806" src="https://github.com/user-attachments/assets/3c6b77a8-3737-4d2f-b828-a61b8a9064ef" />
+
 
 
 
