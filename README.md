@@ -308,7 +308,23 @@ pgrep vsftpd > /dev/null || vsftpd /etc/vsftpd/vsftpd.conf 2>/dev/null &
 
 echo "=== Setup Chisa selesai ==="
 ```
-### 7.2 Pembuktian
+### 7.2 Konfigurasi utama vsftpd
+```
+listen=YES              → vsftpd jalan sebagai standalone daemon
+anonymous_enable=NO     → login anonim DIMATIKAN, harus pakai akun
+local_enable=YES        → izinkan login pakai akun user lokal Linux
+write_enable=YES        → izinkan operasi tulis (default global)
+chroot_local_user=YES   → user di-"kurung" di dalam home dir-nya, gak bisa keluar ke filesystem lain
+allow_writeable_chroot=YES → izinkan chroot walau home dir writable (biasanya vsftpd nolak demi security, ini di-override)
+local_umask=022         → permission default file yang di-upload
+seccomp_sandbox=NO      → matikan sandbox seccomp (sering perlu di container/Alpine biar gak error)
+userlist_enable=YES     → aktifkan fitur whitelist/blacklist user
+userlist_deny=YES       → mode userlist_file jadi BLACKLIST (user yang ada di file DITOLAK)
+userlist_file=/etc/vsftpd/blocked_users → lokasi file blacklist
+user_config_dir=/etc/vsftpd/user_conf   → folder berisi config KHUSUS per-user (override config global)
+pasv_enable=YES + pasv_min/max_port     → mode Passive FTP, port data 30000-30100
+```
+### 7.3 Pembuktian
 <img width="860" height="204" alt="Screenshot 2026-09-18 000109" src="https://github.com/user-attachments/assets/6fb71b0e-a12d-4f7a-91f1-f7c20ea8c0ce" />
 
 # 8
