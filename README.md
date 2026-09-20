@@ -459,20 +459,72 @@ Analisis Wiresharak
 # 10
 
 **Mencatat nilai ICMP Type dan Code untuk Echo Request vs Echo Reply, serta analisis packet loss dan RTT (min/avg/max) ketika Knights mengirimkan ping ke node Chisa**
+<img width="2874" height="1700" alt="Screenshot 2026-09-15 204802" src="https://github.com/user-attachments/assets/c9124714-edc4-4c11-af24-cb4b216ab851" />
 
 ### 10.1 Mengirim Paket
 ```
 ping -c 77 -s 128 -i 0.3 10.74.2.2
 ```
-### 10.2 Analisis Wireshark Chisa 
+## 10.2 Hasil Output Ping di Console Knights
+ 
+```
+--- 10.74.2.2 ping statistics ---
+77 packets transmitted, 77 received, 0% packet loss, time 23084ms
+rtt min/avg/max/mdev = 0.499/0.681/1.555/0.205 ms
+```
+ 
+Setiap baris balasan menunjukkan ukuran total paket **136 bytes** (128 bytes payload + 8 bytes header ICMP), dengan `ttl=63` dan waktu round-trip (RTT) yang bervariasi tiap paketnya, contoh:
+ 
+```
+136 bytes from 10.74.2.2: icmp_seq=40 ttl=63 time=1.55 ms
+136 bytes from 10.74.2.2: icmp_seq=41 ttl=63 time=0.629 ms
+...
+136 bytes from 10.74.2.2: icmp_seq=77 ttl=63 time=0.701 ms
+```
+ 
+## 10.3 Analisis ICMP Type dan Code
+ 
+Trafik ping terdiri dari dua jenis pesan ICMP:
+ 
+| Arah | ICMP Type | ICMP Code | Nama Pesan |
+|---|---|---|---|
+| Knights → Chisa (request) | 8 | 0 | Echo Request |
+| Chisa → Knights (reply) | 0 | 0 | Echo Reply |
+ 
+Type 8 (Echo Request) dikirim oleh Knights sebagai node pengirim, sedangkan Type 0 (Echo Reply) dikirim balik oleh Chisa sebagai tanda paket diterima dan node dalam kondisi hidup (reachable). Code 0 pada keduanya menandakan tidak ada kondisi error tambahan — ini adalah pesan ICMP standar untuk pengujian konektivitas.
+ 
+## 10.4 Analisis Packet Loss
+ 
+```
+77 packets transmitted, 77 received, 0% packet loss
+```
+ 
+Dari 77 paket yang dikirim, seluruhnya (77 paket) berhasil diterima kembali sebagai balasan (Echo Reply), sehingga **packet loss = 0%**. Ini membuktikan jalur Knights → Router → Chisa dalam kondisi stabil tanpa ada paket yang hilang di tengah jalan, mengonfirmasi bahwa routing antar-segmen (Switch 3 ke Switch 2 melalui Router) berfungsi dengan baik.
+ 
+## 10.5 Analisis RTT (Round Trip Time)
+ 
+```
+rtt min/avg/max/mdev = 0.499/0.681/1.555/0.205 ms
+```
+ 
+| Metrik | Nilai | Keterangan |
+|---|---|---|
+| **min** | 0.499 ms | RTT tercepat dari seluruh 77 paket |
+| **avg** | 0.681 ms | Rata-rata RTT keseluruhan |
+| **max** | 1.555 ms | RTT terlama (terlihat pada `icmp_seq=40`, `time=1.55 ms`) |
+| **mdev** | 0.205 ms | Mean deviation — ukuran variasi/jitter RTT antar paket |
+ 
+Nilai RTT yang konsisten di kisaran 0.5–0.8 ms (dengan satu spike di 1.55 ms) menunjukkan latensi yang sangat rendah dan stabil
+### 10.6 Analisis Wireshark Chisa 
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 205043" src="https://github.com/user-attachments/assets/c312130e-f6bb-4651-8f79-f65ce396abe2" />
-### 10.2.1 Analisis Wireshark Chisa - filtering
+### 10.6.1 Analisis Wireshark Chisa - filtering
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 205446" src="https://github.com/user-attachments/assets/2e3d24d3-11df-466d-9438-a09bd7c594d5" />
-### 10.3 Analisis Wireshark Knights
+### 10.7 Analisis Wireshark Knights
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 205255" src="https://github.com/user-attachments/assets/5c681df8-28a2-4a43-9535-bd73eec30b48" />
-### 10.2.1 Analisis Wireshark Knights - filtering
+### 10.7.1 Analisis Wireshark Knights - filtering
 <img width="2880" height="1800" alt="Screenshot 2026-09-15 205513" src="https://github.com/user-attachments/assets/7ca5b975-7704-45d3-94f5-05d94a96042c" />
 <img width="2880" height="1712" alt="Screenshot 2026-09-15 205956" src="https://github.com/user-attachments/assets/c96adb60-bd60-4a94-9c3b-c652be422c31" />
+
 
 
 # 11
@@ -486,13 +538,13 @@ adduser phantom_user
 passwd phantom_user
 ```
 
-- Menyalakan telnetd
+- Menyalakan service `telnetd` agar Chisa bisa menerima koneksi Telnet:
 
 ```
 telnetd -l /bin/login &
 netstat -tulnp | grep 23
 ```
-
+Perintah `telnetd -l /bin/login` menjalankan daemon Telnet dan mengarahkan proses autentikasi ke `/bin/login` (program login standar Linux), sedangkan `netstat -tulnp | grep 23` digunakan untuk memverifikasi bahwa port 23 (port default Telnet) sudah dalam status `LISTEN`.
 - Login dari akun Eiri dengan memasukkan username: Phantom_user dan password: wired_ghost
 <img width="716" height="650" alt="image" src="https://github.com/user-attachments/assets/de28de68-61ab-4de0-8814-5a856107963a" />
 <img width="1398" height="382" alt="image" src="https://github.com/user-attachments/assets/261844da-6000-460b-82c3-3194703af16b" />
@@ -503,7 +555,23 @@ netstat -tulnp | grep 23
   <img width="2536" height="1214" alt="Screenshot 2026-09-15 213208" src="https://github.com/user-attachments/assets/11dfad55-cea8-4318-8c08-d10e27be3cc1" />
   <img width="2880" height="1800" alt="Screenshot 2026-09-15 213059" src="https://github.com/user-attachments/assets/f296c21c-6987-44a7-99ed-3c7178ced695" />
   <img width="2880" height="1800" alt="Screenshot 2026-09-15 213142" src="https://github.com/user-attachments/assets/338a6347-abd2-4664-8b3b-18d9044e5d4e" />
+Fitur **Follow → TCP Stream** pada Wireshark digunakan untuk merekonstruksi seluruh percakapan TCP antara Eiri dan Chisa menjadi satu tampilan yang mudah dibaca (bukan per-paket terpisah). Hasilnya menunjukkan:
+ 
+- Karakter demi karakter dari **username** (`phantom_user`) muncul secara plain text
+- Karakter demi karakter dari **password** (`wired_ghost`) juga muncul secara plain text, **tanpa masking** (tidak ada tanda `*` atau enkripsi apa pun)
+Ini membuktikan bahwa siapa pun yang menyadap trafik jaringan — baik lewat MITM, port mirroring, atau akses ke segmen jaringan yang sama — bisa membaca kredensial login korban secara utuh hanya dengan membaca isi paket.
 
+- Mengapa Setiap Karakter Terkirim dalam Paket TCP Terpisah
+ 
+Ini adalah karakteristik desain protokol Telnet itu sendiri, bukan sekadar hasil capture yang kebetulan terpecah. Alasannya:
+ 
+1. **Mode karakter-per-karakter (character-at-a-time mode)**
+   Secara default, Telnet beroperasi dalam mode di mana setiap tombol yang ditekan client langsung dikirim ke server **satu per satu**, saat itu juga — bukan dikumpulkan dulu menjadi satu baris penuh baru dikirim (line-mode/buffered). Tujuannya supaya server bisa langsung memproses input secara real-time, termasuk untuk keperluan seperti auto-complete atau kontrol interaktif di sisi server.
+2. **Remote echo, bukan local echo**
+   Karena Telnet umumnya menggunakan *remote echo* (server yang menampilkan balik karakter yang diketik client, bukan client sendiri yang menampilkannya secara lokal), setiap karakter **harus** dikirim ke server dahulu, baru server mengirim balik karakter itu untuk ditampilkan di layar client. Ini otomatis membuat proses input jadi granular per karakter, bukan per baris.
+3. **Tidak ada buffering di layer aplikasi**
+   Karena Telnet tidak melakukan buffering (berbeda dengan protokol lain yang menunggu Enter/newline baru mengirim seluruh baris), setiap keystroke langsung dibungkus jadi payload TCP kecil dan dikirim independen. Alhasil, dalam capture Wireshark, kita bisa melihat puluhan paket kecil berurutan — masing-masing cuma berisi 1 byte data — mewakili satu huruf dari `phantom_user` atau `wired_ghost`.
+Karakteristik inilah yang justru mempermudah proses pembuktian di Follow TCP Stream: karena tiap paket kecil ini direkonstruksi ulang secara berurutan oleh Wireshark menjadi satu aliran teks yang utuh dan terbaca, kredensial korban jadi terlihat gamblang tanpa perlu decoding atau dekripsi apa pun.
 # 12
 
 **Melakukan pemindaian port dari node Alice ke node Knights menggunakan Netcat (nc) untuk memeriksa beberapa port yaitu**
