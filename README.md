@@ -16,7 +16,7 @@
 <img width="1864" height="1402" alt="image" src="https://github.com/user-attachments/assets/e8639d4e-0fd6-428b-ac60-5742fabf3c76" />
 - Router 1 pusat dengan 3 interface (eth1, eth2, eth3) menuju 3 switch berbeda
 - Switch1 → Alice & Mika (2 client)
-- Switch2 → Chisa (1 client, FTP server nantinya)
+- Switch2 → Chisa (1 client)
 - Switch3 → Knights & Eiri (2 client)
 - NAT1 terhubung ke Router lewat eth0, ini untuk akses ke internet publik
 
