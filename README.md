@@ -240,7 +240,7 @@ chmod +x traffic_protocol7.sh
 <img width="909" height="575" alt="Tangkapan Layar 2026-09-20 pukul 17 48 49" src="https://github.com/user-attachments/assets/d51940a3-eaa3-408c-a8b1-b13a9648aaf3" />
 
 <img width="925" height="579" alt="Tangkapan Layar 2026-09-20 pukul 17 49 08" src="https://github.com/user-attachments/assets/6f851d2e-d4d7-479b-b2f8-8c456fe2c72c" />
-
+Hasil: Terdapat 33 Paket dengan protocol ICMP dan DNS
 
 
 # 7
@@ -315,9 +315,9 @@ anonymous_enable=NO     → login anonim DIMATIKAN, harus pakai akun
 local_enable=YES        → izinkan login pakai akun user lokal Linux
 write_enable=YES        → izinkan operasi tulis (default global)
 chroot_local_user=YES   → user di-"kurung" di dalam home dir-nya, gak bisa keluar ke filesystem lain
-allow_writeable_chroot=YES → izinkan chroot walau home dir writable (biasanya vsftpd nolak demi security, ini di-override)
+allow_writeable_chroot=YES → izinkan chroot walau home dir writable 
 local_umask=022         → permission default file yang di-upload
-seccomp_sandbox=NO      → matikan sandbox seccomp (sering perlu di container/Alpine biar gak error)
+seccomp_sandbox=NO      → matikan sandbox seccomp 
 userlist_enable=YES     → aktifkan fitur whitelist/blacklist user
 userlist_deny=YES       → mode userlist_file jadi BLACKLIST (user yang ada di file DITOLAK)
 userlist_file=/etc/vsftpd/blocked_users → lokasi file blacklist
